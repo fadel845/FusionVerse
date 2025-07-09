@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FusionVerse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .glow {
+      position: absolute;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 60%);
+      animation: pulse 5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+      50% { transform: scale(1.05) rotate(180deg); opacity: 1; }
+      100% { transform: scale(1) rotate(360deg); opacity: 0.7; }
+    }
+    .content {
+      text-align: center;
+      padding: 2em;
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      background-color: rgba(0,0,0,0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+    h1 {
+      font-size: 4em;
+      background: linear-gradient(90deg, #00f0ff, #ff00e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #00f0ff;
+      margin-bottom: 0.5em;
+    }
+    p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 2em;
+    }
+    .buttons {
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      text-decoration: none;
+      color: #000;
+      background-color: #00f0ff;
+      padding: 0.75em 1.5em;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 0 10px #00f0ff70;
+    }
+    .btn:hover {
+      background-color: #00c1a9;
+      transform: scale(1.05);
+    }
+    .memes {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 2em;
+      animation: float 4s ease-in-out infinite;
+    }
+    .memes img {
+      width: 70px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"><div class="glow"></div></div>
+  <div class="content">
+    <h1>FusionVerse</h1>
+    <p>The Meme Fusion Revolution Has Begun.<br/>Doge ⚡ Pepe ⚡ Wojak. One Chain. $FUSV.</p>
+    <div class="buttons">
+      <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
+      <a href="https://t.me/FusionVersePortal" class="btn" target="_blank">Telegram</a>
+      <a href="https://solscan.io/token/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token Contract</a>
+    </div>
+  </div>
+  <div class="memes">
+    <img src="https://i.imgur.com/6Fj0m7p.png" alt="Doge" />
+    <img src="https://i.imgur.com/KR7N3yA.png" alt="Pepe" />
+    <img src="https://i.imgur.com/VXJ7aGX.png" alt="Wojak" />
+  </div>
+</body>
+</html>
