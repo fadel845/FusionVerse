@@ -6,130 +6,86 @@
     <title>FusionVerse</title>
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Reset margins and padding for all elements and set box-sizing */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Set body and html height to fill screen, define font, and hide overflow */
         body, html {
             height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Prevents scrollbars if content overflows */
+            overflow: hidden;
         }
 
-        /* Body background: background image, no-repeat, center, fixed, cover */
         body {
             background: url('https://i.ibb.co/QM8H9L5/fusionverse-cyberpunk.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: white; /* Default text color */
+            color: white;
         }
 
-        /* Transparent overlay covering the entire screen for a darker effect */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* 60% transparent black background */
-            z-index: 0; /* Lower layer */
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 0;
         }
 
-        /* Floating images: absolute position, fixed width, repetitive "float" animation, slightly transparent */
-        .floating-img {
-            position: absolute;
-            width: 80px; /* Image size */
-            animation: float 6s ease-in-out infinite; /* Apply "float" animation */
-            opacity: 0.9; /* Slight transparency */
-            z-index: 1; /* Above the overlay layer */
-        }
-
-        /* Positioning of individual floating images */
-        .doge {
-            top: 10%;
-            left: 5%;
-        }
-        .pepe {
-            bottom: 10%;
-            right: 8%;
-            animation-delay: 2s; /* Delay Pepe's animation start */
-        }
-        .wojak {
-            top: 50%;
-            right: 15%;
-            animation-delay: 4s; /* Delay Wojak's animation start */
-        }
-
-        /* Define "float" animation: vertical up and down movement */
-        @keyframes float {
-            0% { transform: translateY(0px); } /* Starts from original position */
-            50% { transform: translateY(-20px); } /* Moves up 20px */
-            100% { transform: translateY(0px); } /* Returns to original position */
-        }
-
-        /* Main content: centered on screen, above everything else */
         .content {
             position: relative;
-            z-index: 2; /* Above floating images */
-            height: 100vh; /* 100% of viewport height */
+            z-index: 2;
+            height: 100vh;
             display: flex;
-            flex-direction: column; /* Arrange elements vertically */
-            align-items: center; /* Center elements horizontally */
-            justify-content: center; /* Center elements vertically */
-            text-align: center; /* Center text */
-            padding: 20px; /* Inner spacing */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
         }
 
-        /* Main heading: font size, "glow" animation, and text shadow */
         h1 {
-            font-size: 3.5em; /* Large heading size */
-            animation: glow 2s ease-in-out infinite alternate; /* Apply "glow" animation */
-            text-shadow: 0 0 15px #00fff7; /* Text shadow for glow effect */
+            font-size: 3.5em;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px #00fff7;
         }
 
-        /* Define "glow" animation: text glow effect */
         @keyframes glow {
-            from { text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7; } /* Initial glow */
-            to { text-shadow: 0 0 25px #00ffff, 0 0 35px #00ffff; } /* Stronger glow */
+            from { text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7; }
+            to { text-shadow: 0 0 25px #00ffff, 0 0 35px #00ffff; }
         }
 
-        /* Paragraph text: font size, margin, and text shadow */
         p {
             font-size: 1.3em;
             margin: 20px 0;
             text-shadow: 0 0 10px #000;
         }
 
-        /* Button group: flexible arrangement, spacing between buttons, wrap if needed, centered */
         .button-group {
             display: flex;
-            gap: 20px; /* Space between buttons */
-            flex-wrap: wrap; /* Allow buttons to wrap to a new line if space is limited */
-            justify-content: center; /* Center buttons */
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* Buttons: design, colors, padding, rounded corners, shadow, and smooth transition on interaction */
         a.btn {
-            background: rgba(0, 255, 195, 0.9); /* Transparent bluish-green background */
-            color: #000; /* Black text color */
+            background: rgba(0, 255, 195, 0.9);
+            color: #000;
             padding: 12px 24px;
-            border-radius: 30px; /* Very rounded corners */
-            text-decoration: none; /* Remove underline */
-            font-weight: bold; /* Bold text */
-            box-shadow: 0 0 15px #00ffc3aa; /* Light shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation on interaction */
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00ffc3aa;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Hover effect when mouse pointer is over buttons */
         a.btn:hover {
-            transform: scale(1.1); /* Slightly enlarge button */
-            box-shadow: 0 0 25px #00ffc3; /* Increase shadow glow */
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #00ffc3;
         }
 
-        /* Footer: fixed position at bottom, centered text, color, and font size */
         footer {
             position: absolute;
             bottom: 10px;
@@ -137,21 +93,16 @@
             text-align: center;
             color: #ccc;
             font-size: 0.8em;
-            z-index: 2; /* Above overlay and images */
+            z-index: 2;
         }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
 
-    <img src="https://i.ibb.co/0Xg9z7H/doge.png" alt="Doge" class="floating-img doge">
-    <img src="https://i.ibb.co/L8y2p6C/pepe.png" alt="Pepe" class="floating-img pepe">
-    <img src="https://i.ibb.co/k2W1R3F/wojak.png" alt="Wojak" class="floating-img wojak">
-
     <div class="content">
         <h1>⚡ FusionVerse</h1>
-        <p>Where memes collide into one powerful chain.</p>
-        <div class="button-group">
+        <p>Fusion Unleashed: The Ultimate Meme Genesis.</p> <div class="button-group">
             <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
             <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
             <a href="https://solscan.io/token/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
