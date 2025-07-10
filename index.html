@@ -1,151 +1,94 @@
+<!-- FusionVerse - Cyberpunk Landing Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fusion Runner</title>
+  <title>FusionVerse</title>
   <style>
-    body {
+    * {
       margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to top right, #0f0c29, #302b63, #24243e);
-      font-family: sans-serif;
-      color: white;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    #gameCanvas {
-      display: block;
-      margin: auto;
-      background: #111;
-      border: 2px solid #fff;
-      box-shadow: 0 0 20px rgba(0,255,255,0.5);
-    }
-
-    #message {
-      position: absolute;
-      top: 20px;
-      width: 100%;
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('https://4kwallpapers.com/images/wallpapers/cyberpunk-city-neon-glow-3840x2160-8850.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
       text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      animation: fadein 1s;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    @keyframes fadein {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      animation: pulse 3s infinite;
+      background: linear-gradient(to right, #ff00cc, #3333ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 1em;
+      color: #fff;
+      text-decoration: none;
+      border: 2px solid #fff;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2em;
+      }
     }
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="600" height="400"></canvas>
-  <div id="message"></div>
-
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const player = {
-      x: 50,
-      y: 350,
-      width: 30,
-      height: 30,
-      color: "cyan",
-      dy: 0,
-      gravity: 1,
-      jump: -15,
-      grounded: true,
-    };
-
-    const obstacles = [];
-    let score = 0;
-    const messages = [
-      "Oops! Try again.",
-      "Fusion failed ☹️",
-      "Memes don't always win!",
-      "Back to the chain!",
-      "Fusion overloaded 💥",
-    ];
-
-    let lost = false;
-
-    function createObstacle() {
-      const height = Math.random() * 30 + 20;
-      obstacles.push({
-        x: canvas.width,
-        y: canvas.height - height,
-        width: 20,
-        height: height,
-        color: "red",
-      });
-    }
-
-    function drawPlayer() {
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.width, player.height);
-    }
-
-    function drawObstacles() {
-      for (let obs of obstacles) {
-        ctx.fillStyle = obs.color;
-        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-      }
-    }
-
-    function update() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      player.dy += player.gravity;
-      player.y += player.dy;
-
-      if (player.y + player.height >= canvas.height) {
-        player.y = canvas.height - player.height;
-        player.dy = 0;
-        player.grounded = true;
-      }
-
-      for (let obs of obstacles) {
-        obs.x -= 5;
-        if (
-          player.x < obs.x + obs.width &&
-          player.x + player.width > obs.x &&
-          player.y < obs.y + obs.height &&
-          player.y + player.height > obs.y
-        ) {
-          lost = true;
-        }
-      }
-
-      if (lost) {
-        document.getElementById("message").innerText = messages[Math.floor(Math.random() * messages.length)];
-        return;
-      }
-
-      drawPlayer();
-      drawObstacles();
-
-      score++;
-      requestAnimationFrame(update);
-    }
-
-    setInterval(createObstacle, 2000);
-
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space" && player.grounded) {
-        player.dy = player.jump;
-        player.grounded = false;
-      }
-    });
-
-    update();
-
-    // Sound
-    const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2023/03/29/audio_6b8dbbfef4.mp3");
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space" && player.grounded) {
-        jumpSound.play();
-      }
-    });
-  </script>
+  <h1>FusionVerse</h1>
+  <p class="tagline">Where memes unite. Chaos becomes power. Crypto meets fun.</p>
+  <div class="buttons">
+    <a href="https://twitter.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
+    <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
+    <a href="https://tonviewer.com/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token Contract</a>
+  </div>
 </body>
 </html>
