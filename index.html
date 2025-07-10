@@ -1,116 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
     <title>FusionVerse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body, html {
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
+      body {
+        font-family: 'Arial', sans-serif;
+        background: url('https://i.imgur.com/kqeoR4X.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
 
-        body {
-            background: url('https://i.ibb.co/QM8H9L5/fusionverse-cyberpunk.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-        }
+      h1 {
+        font-size: 3em;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 0;
-        }
+      p {
+        font-size: 1.2em;
+        margin: 20px 0;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 10px 20px;
+        border-radius: 10px;
+      }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
+      .btn-container {
+        margin-top: 30px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-        h1 {
-            font-size: 3.5em;
-            animation: glow 2s ease-in-out infinite alternate;
-            text-shadow: 0 0 15px #00fff7;
-        }
+      .btn {
+        text-decoration: none;
+        color: white;
+        padding: 12px 24px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid white;
+        border-radius: 25px;
+        transition: background 0.3s ease;
+      }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7; }
-            to { text-shadow: 0 0 25px #00ffff, 0 0 35px #00ffff; }
-        }
+      .btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
 
-        p {
-            font-size: 1.3em;
-            margin: 20px 0;
-            text-shadow: 0 0 10px #000;
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
         }
-
-        .button-group {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+        to {
+          text-shadow: 0 0 20px #fff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
         }
-
-        a.btn {
-            background: rgba(0, 255, 195, 0.9);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 0 15px #00ffc3aa;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        a.btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px #00ffc3;
-        }
-
-        footer {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            color: #ccc;
-            font-size: 0.8em;
-            z-index: 2;
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="overlay"></div>
+  </head>
+  <body>
+    <h1>FusionVerse</h1>
+    <p>Brace yourself... The fusion is just beginning ⚡</p>
 
-    <div class="content">
-        <h1>⚡ FusionVerse</h1>
-        <p>Fusion Unleashed: The Ultimate Meme Genesis.</p> <div class="button-group">
-            <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
-            <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
-            <a href="https://solscan.io/token/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
-        </div>
+    <div class="btn-container">
+      <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
+      <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
+      <a href="https://tonviewer.com/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
     </div>
-
-    <footer>
-        © 2025 FusionVerse. All Rights Reserved.
-    </footer>
-</body>
+  </body>
 </html>
