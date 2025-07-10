@@ -5,127 +5,162 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FusionVerse</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
-      color: white;
-      background: url('https://i.imgur.com/kqeoR4X.jpeg') no-repeat center center fixed;
+      background: url('https://imgur.com/kqeoR4X.jpg') no-repeat center center fixed;
       background-size: cover;
-    }
-
-    .hero {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-      background-color: rgba(0,0,0,0.4);
-    }
-
-    .content h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeSlideIn 1s ease forwards;
-    }
-
-    .content p {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-      max-width: 800px;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-    }
-
-    .content p:nth-of-type(1) { animation-delay: 0.8s; }
-    .content p:nth-of-type(2) { animation-delay: 1.5s; }
-
-    .typing {
-      font-size: 1.3rem;
-      color: #fff;
-      border-right: 2px solid #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(40, end) 2.3s forwards, blink 0.75s step-end infinite;
-    }
-
-    .btn-container {
-      margin-top: 35px;
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 5.5s;
-      opacity: 0;
-    }
-
-    .btn {
-      text-decoration: none;
       color: white;
-      padding: 12px 24px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid white;
-      border-radius: 25px;
-      transition: background 0.3s ease;
+      text-align: center;
     }
 
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+    .title {
+      font-size: 3em;
+      margin-top: 40px;
+      animation: glow 2s infinite alternate;
     }
 
-    @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
+      to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    .quote {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: 0.8;
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    .btns {
+      margin: 20px 0;
     }
 
-    @keyframes blink {
-      50% { border-color: transparent; }
+    .btns a {
+      text-decoration: none;
+      margin: 10px;
+      padding: 12px 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      color: cyan;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btns a:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    #gameCanvas {
+      background: rgba(0,0,0,0.2);
+      border: 2px solid cyan;
+      margin: 20px auto;
+      display: block;
+    }
+
+    #message {
+      font-size: 1.5em;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff7070;
     }
   </style>
 </head>
 <body>
+  <div class="title">FusionVerse</div>
+  <div class="quote">One chain. One mission. Infinite memes.</div>
 
-  <div class="hero">
-    <div class="content">
-      <h1>What is FusionVerse?</h1>
-      <p>FusionVerse is where internet culture meets crypto chaos.</p>
-      <p>The wildest memes. The craziest ideas. All fused into one unstoppable force.</p>
-      <div class="typing">Get involved. Get loud. Get fused.</div>
-
-      <div class="btn-container">
-        <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
-        <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
-        <a href="https://tonviewer.com/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
-      </div>
-    </div>
+  <div class="btns">
+    <a href="https://twitter.com/FusionVerse1" target="_blank">Twitter</a>
+    <a href="https://t.me/FusionVerse1" target="_blank">Telegram</a>
+    <a href="https://pump.fun/" target="_blank">Token</a>
   </div>
 
+  <canvas id="gameCanvas" width="300" height="150"></canvas>
+  <div id="message"></div>
+
+  <audio id="jumpSound" src="https://assets.mixkit.co/sfx/preview/mixkit-quick-jump-arcade-game-239.wav"></audio>
+  <audio id="bgMusic" src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" loop></audio>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let player = { x: 20, y: 110, width: 20, height: 20, dy: 0, jumping: false };
+    let token = { x: 300, y: 110, width: 20, height: 20 };
+    let gravity = 1;
+    let score = 0;
+
+    const jumpSound = document.getElementById("jumpSound");
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.volume = 0.1;
+    bgMusic.play();
+
+    const messages = [
+      "Oops! Try again!",
+      "Fusion needs you!",
+      "Don't let the memes down!",
+      "One more run!",
+      "You're getting better!"
+    ];
+
+    function drawPlayer() {
+      ctx.fillStyle = "#0ff";
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawToken() {
+      ctx.fillStyle = "#ff0";
+      ctx.fillRect(token.x, token.y, token.width, token.height);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      player.y += player.dy;
+      if (player.y < 110) {
+        player.dy += gravity;
+      } else {
+        player.y = 110;
+        player.dy = 0;
+        player.jumping = false;
+      }
+
+      token.x -= 4;
+      if (token.x < 0) {
+        token.x = 300;
+      }
+
+      if (player.x < token.x + token.width &&
+          player.x + player.width > token.x &&
+          player.y < token.y + token.height &&
+          player.y + player.height > token.y) {
+        token.x = 300;
+        score++;
+      }
+
+      drawPlayer();
+      drawToken();
+
+      if (token.x === player.x) {
+        let msg = messages[Math.floor(Math.random() * messages.length)];
+        document.getElementById("message").textContent = msg;
+        score = 0;
+        token.x = 300;
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.code === "Space" && !player.jumping) {
+        player.dy = -15;
+        player.jumping = true;
+        jumpSound.play();
+      }
+    });
+
+    update();
+  </script>
 </body>
 </html>
