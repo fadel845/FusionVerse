@@ -1,82 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>FusionVerse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FusionVerse</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family: 'Arial', sans-serif;
-        background: url('https://i.imgur.com/kqeoR4X.jpeg') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('https://i.imgur.com/kqeoR4X.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      scroll-behavior: smooth;
+    }
 
-      h1 {
-        font-size: 3em;
-        animation: glow 2s ease-in-out infinite alternate;
-      }
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: brightness(0.9) blur(3px);
+    }
 
-      p {
-        font-size: 1.2em;
-        margin: 20px 0;
-        background: rgba(0, 0, 0, 0.4);
-        padding: 10px 20px;
-        border-radius: 10px;
-      }
+    h1, h2 {
+      text-shadow: 0 0 15px #00f0ff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-      .btn-container {
-        margin-top: 30px;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
+    p {
+      max-width: 800px;
+      text-align: center;
+      font-size: 1.2em;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 15px 25px;
+      border-radius: 12px;
+    }
 
-      .btn {
-        text-decoration: none;
-        color: white;
-        padding: 12px 24px;
-        background: rgba(0, 0, 0, 0.6);
-        border: 1px solid white;
-        border-radius: 25px;
-        transition: background 0.3s ease;
-      }
+    .btn-container {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-      .btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
+    .btn {
+      text-decoration: none;
+      color: white;
+      padding: 12px 24px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid white;
+      border-radius: 25px;
+      transition: background 0.3s ease;
+    }
 
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 10px #fff, 0 0 20px #00f0ff, 0 0 30px #00f0ff;
-        }
-        to {
-          text-shadow: 0 0 20px #fff, 0 0 40px #00f0ff, 0 0 60px #00f0ff;
-        }
-      }
-    </style>
-  </head>
-  <body>
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 0;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Navigation Bar -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#why">Why Fusion?</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <!-- 🔹 Hero Section -->
+  <section id="hero">
     <h1>FusionVerse</h1>
     <p>Brace yourself... The fusion is just beginning ⚡</p>
+  </section>
 
+  <!-- 🔹 About Section -->
+  <section id="about">
+    <h2>What is FusionVerse?</h2>
+    <p>
+      FusionVerse is where your favorite memes collide and evolve into something bigger.
+      Not just Doge. Not just Pepe. This is a chaotic yet beautiful fusion of meme culture and blockchain power.
+    </p>
+  </section>
+
+  <!-- 🔹 Why Fusion -->
+  <section id="why">
+    <h2>Why Fusion?</h2>
+    <p>
+      Because no single meme is enough. FusionVerse brings the internet’s chaotic energy into a single, unified force.
+      A place where creativity, community, and crypto collide with pure fun.
+    </p>
+  </section>
+
+  <!-- 🔹 Join Us Section -->
+  <section id="join">
+    <h2>Join the Movement</h2>
+    <p>Get involved. Get loud. Get fused.</p>
     <div class="btn-container">
       <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
       <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
       <a href="https://tonviewer.com/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
     </div>
-  </body>
+  </section>
+
+</body>
 </html>
