@@ -3,164 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FusionVerse</title>
+  <title>Fusion Runner</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://imgur.com/kqeoR4X.jpg') no-repeat center center fixed;
-      background-size: cover;
+      overflow: hidden;
+      background: linear-gradient(to top right, #0f0c29, #302b63, #24243e);
+      font-family: sans-serif;
       color: white;
-      text-align: center;
-    }
-
-    .title {
-      font-size: 3em;
-      margin-top: 40px;
-      animation: glow 2s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; }
-      to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
-    }
-
-    .quote {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-      opacity: 0.8;
-    }
-
-    .btns {
-      margin: 20px 0;
-    }
-
-    .btns a {
-      text-decoration: none;
-      margin: 10px;
-      padding: 12px 20px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 10px;
-      color: cyan;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .btns a:hover {
-      background: rgba(0,0,0,0.8);
     }
 
     #gameCanvas {
-      background: rgba(0,0,0,0.2);
-      border: 2px solid cyan;
-      margin: 20px auto;
       display: block;
+      margin: auto;
+      background: #111;
+      border: 2px solid #fff;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
     }
 
     #message {
-      font-size: 1.5em;
-      margin-top: 20px;
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
       font-weight: bold;
-      color: #ff7070;
+      animation: fadein 1s;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="title">FusionVerse</div>
-  <div class="quote">One chain. One mission. Infinite memes.</div>
-
-  <div class="btns">
-    <a href="https://twitter.com/FusionVerse1" target="_blank">Twitter</a>
-    <a href="https://t.me/FusionVerse1" target="_blank">Telegram</a>
-    <a href="https://pump.fun/" target="_blank">Token</a>
-  </div>
-
-  <canvas id="gameCanvas" width="300" height="150"></canvas>
+  <canvas id="gameCanvas" width="600" height="400"></canvas>
   <div id="message"></div>
-
-  <audio id="jumpSound" src="https://assets.mixkit.co/sfx/preview/mixkit-quick-jump-arcade-game-239.wav"></audio>
-  <audio id="bgMusic" src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" loop></audio>
 
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    let player = { x: 20, y: 110, width: 20, height: 20, dy: 0, jumping: false };
-    let token = { x: 300, y: 110, width: 20, height: 20 };
-    let gravity = 1;
+    const player = {
+      x: 50,
+      y: 350,
+      width: 30,
+      height: 30,
+      color: "cyan",
+      dy: 0,
+      gravity: 1,
+      jump: -15,
+      grounded: true,
+    };
+
+    const obstacles = [];
     let score = 0;
-
-    const jumpSound = document.getElementById("jumpSound");
-    const bgMusic = document.getElementById("bgMusic");
-    bgMusic.volume = 0.1;
-    bgMusic.play();
-
     const messages = [
-      "Oops! Try again!",
-      "Fusion needs you!",
-      "Don't let the memes down!",
-      "One more run!",
-      "You're getting better!"
+      "Oops! Try again.",
+      "Fusion failed ☹️",
+      "Memes don't always win!",
+      "Back to the chain!",
+      "Fusion overloaded 💥",
     ];
 
+    let lost = false;
+
+    function createObstacle() {
+      const height = Math.random() * 30 + 20;
+      obstacles.push({
+        x: canvas.width,
+        y: canvas.height - height,
+        width: 20,
+        height: height,
+        color: "red",
+      });
+    }
+
     function drawPlayer() {
-      ctx.fillStyle = "#0ff";
+      ctx.fillStyle = player.color;
       ctx.fillRect(player.x, player.y, player.width, player.height);
     }
 
-    function drawToken() {
-      ctx.fillStyle = "#ff0";
-      ctx.fillRect(token.x, token.y, token.width, token.height);
+    function drawObstacles() {
+      for (let obs of obstacles) {
+        ctx.fillStyle = obs.color;
+        ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+      }
     }
 
     function update() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      player.dy += player.gravity;
       player.y += player.dy;
-      if (player.y < 110) {
-        player.dy += gravity;
-      } else {
-        player.y = 110;
+
+      if (player.y + player.height >= canvas.height) {
+        player.y = canvas.height - player.height;
         player.dy = 0;
-        player.jumping = false;
+        player.grounded = true;
       }
 
-      token.x -= 4;
-      if (token.x < 0) {
-        token.x = 300;
+      for (let obs of obstacles) {
+        obs.x -= 5;
+        if (
+          player.x < obs.x + obs.width &&
+          player.x + player.width > obs.x &&
+          player.y < obs.y + obs.height &&
+          player.y + player.height > obs.y
+        ) {
+          lost = true;
+        }
       }
 
-      if (player.x < token.x + token.width &&
-          player.x + player.width > token.x &&
-          player.y < token.y + token.height &&
-          player.y + player.height > token.y) {
-        token.x = 300;
-        score++;
+      if (lost) {
+        document.getElementById("message").innerText = messages[Math.floor(Math.random() * messages.length)];
+        return;
       }
 
       drawPlayer();
-      drawToken();
+      drawObstacles();
 
-      if (token.x === player.x) {
-        let msg = messages[Math.floor(Math.random() * messages.length)];
-        document.getElementById("message").textContent = msg;
-        score = 0;
-        token.x = 300;
-      }
-
+      score++;
       requestAnimationFrame(update);
     }
 
-    document.addEventListener("keydown", e => {
-      if (e.code === "Space" && !player.jumping) {
-        player.dy = -15;
-        player.jumping = true;
-        jumpSound.play();
+    setInterval(createObstacle, 2000);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && player.grounded) {
+        player.dy = player.jump;
+        player.grounded = false;
       }
     });
 
     update();
+
+    // Sound
+    const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2023/03/29/audio_6b8dbbfef4.mp3");
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && player.grounded) {
+        jumpSound.play();
+      }
+    });
   </script>
 </body>
 </html>
