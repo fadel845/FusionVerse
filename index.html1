@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusion Runner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    canvas {
+      border: 2px solid #fff;
+      background: linear-gradient(to bottom, #1a1a1a, #333);
+    }
+    #startBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00f7ff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #000;
+      font-weight: bold;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ff4e4e;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="600" height="300"></canvas>
+  <button id="startBtn">Start Game</button>
+  <div id="message"></div><audio id="jumpSound" src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_3fdabe2b77.mp3?filename=click-124467.mp3"></audio> <audio id="bgMusic" src="https://cdn.pixabay.com/download/audio/2023/03/12/audio_b3d80103b5.mp3?filename=background-music-141241.mp3" loop></audio>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const startBtn = document.getElementById('startBtn');
+    const message = document.getElementById('message');
+    const jumpSound = document.getElementById('jumpSound');
+    const bgMusic = document.getElementById('bgMusic');
+
+    const lossMessages = [
+      "Oops! Meme crash! 😵",
+      "Try again, fusion master! 💥",
+      "Another one bites the meme! 😂",
+      "Down goes the runner... 🫠",
+      "Fusion overload! 💣"
+    ];
+
+    let player = { x: 50, y: 230, width: 30, height: 30, dy: 0, jumping: false };
+    let obstacle = { x: 600, y: 230, width: 20, height: 30 };
+    let gravity = 1.5;
+    let gameRunning = false;
+
+    function drawPlayer() {
+      ctx.fillStyle = '#00f7ff';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawObstacle() {
+      ctx.fillStyle = '#ff0055';
+      ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawObstacle();
+
+      if (gameRunning) {
+        obstacle.x -= 5;
+        if (obstacle.x + obstacle.width < 0) obstacle.x = 600;
+
+        if (player.jumping) {
+          player.y += player.dy;
+          player.dy += gravity;
+
+          if (player.y >= 230) {
+            player.y = 230;
+            player.dy = 0;
+            player.jumping = false;
+          }
+        }
+
+        // collision detection
+        if (
+          player.x < obstacle.x + obstacle.width &&
+          player.x + player.width > obstacle.x &&
+          player.y < obstacle.y + obstacle.height &&
+          player.y + player.height > obstacle.y
+        ) {
+          endGame();
+        }
+
+        requestAnimationFrame(update);
+      }
+    }
+
+    function startGame() {
+      player.y = 230;
+      player.dy = 0;
+      obstacle.x = 600;
+      gameRunning = true;
+      message.innerText = '';
+      bgMusic.volume = 0.2;
+      bgMusic.play();
+      update();
+    }
+
+    function endGame() {
+      gameRunning = false;
+      bgMusic.pause();
+      message.innerText = lossMessages[Math.floor(Math.random() * lossMessages.length)];
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && !player.jumping && gameRunning) {
+        player.jumping = true;
+        player.dy = -20;
+        jumpSound.play();
+      }
+    });
+
+    startBtn.addEventListener('click', startGame);
+  </script></body>
+</html>
