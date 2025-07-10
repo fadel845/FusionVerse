@@ -11,42 +11,27 @@
       box-sizing: border-box;
     }
 
-    body {
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       font-family: 'Arial', sans-serif;
+    }
+
+    .hero {
       background: url('https://i.imgur.com/kqeoR4X.jpeg') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      scroll-behavior: smooth;
-    }
-
-    section {
-      min-height: 100vh;
-      padding: 80px 20px;
+      width: 100%;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
-      backdrop-filter: brightness(0.9) blur(3px);
-    }
-
-    h1, h2 {
-      text-shadow: 0 0 15px #00f0ff;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    p {
-      max-width: 800px;
-      text-align: center;
-      font-size: 1.2em;
-      line-height: 1.6;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 15px 25px;
-      border-radius: 12px;
+      padding-bottom: 60px;
+      position: relative;
     }
 
     .btn-container {
-      margin-top: 30px;
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
@@ -57,7 +42,7 @@
       text-decoration: none;
       color: white;
       padding: 12px 24px;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid white;
       border-radius: 25px;
       transition: background 0.3s ease;
@@ -66,74 +51,17 @@
     .btn:hover {
       background: rgba(255, 255, 255, 0.2);
     }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.5);
-      padding: 10px 0;
-      text-align: center;
-      z-index: 1000;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
 
-  <!-- 🔹 Navigation Bar -->
-  <nav>
-    <a href="#hero">Home</a>
-    <a href="#about">About</a>
-    <a href="#why">Why Fusion?</a>
-    <a href="#join">Join</a>
-  </nav>
-
-  <!-- 🔹 Hero Section -->
-  <section id="hero">
-    <h1>FusionVerse</h1>
-    <p>Brace yourself... The fusion is just beginning ⚡</p>
-  </section>
-
-  <!-- 🔹 About Section -->
-  <section id="about">
-    <h2>What is FusionVerse?</h2>
-    <p>
-      FusionVerse is where your favorite memes collide and evolve into something bigger.
-      Not just Doge. Not just Pepe. This is a chaotic yet beautiful fusion of meme culture and blockchain power.
-    </p>
-  </section>
-
-  <!-- 🔹 Why Fusion -->
-  <section id="why">
-    <h2>Why Fusion?</h2>
-    <p>
-      Because no single meme is enough. FusionVerse brings the internet’s chaotic energy into a single, unified force.
-      A place where creativity, community, and crypto collide with pure fun.
-    </p>
-  </section>
-
-  <!-- 🔹 Join Us Section -->
-  <section id="join">
-    <h2>Join the Movement</h2>
-    <p>Get involved. Get loud. Get fused.</p>
+  <div class="hero">
     <div class="btn-container">
       <a href="https://x.com/FusionVerse1" class="btn" target="_blank">Twitter</a>
       <a href="https://t.me/FusionVerse1" class="btn" target="_blank">Telegram</a>
       <a href="https://tonviewer.com/FxNqwNjR8m7kx8orH6p8Y3NVDyGLwkLfTY8ngbsebonk" class="btn" target="_blank">Token</a>
     </div>
-  </section>
+  </div>
 
 </body>
 </html>
