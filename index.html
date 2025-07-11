@@ -5,56 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FusionVerse</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: url('https://imgur.com/krWWd7J.png') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      overflow: hidden;
+      box-sizing: border-box;
     }
 
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 60px 20px;
+    body {
       height: 100vh;
+      background: url('https://i.imgur.com/krWWd7J.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      text-align: center;
+      justify-content: space-between;
+      padding: 40px 20px;
     }
 
-    .logo {
-      font-size: 48px;
-      font-weight: bold;
-      animation: glow 3s ease-in-out infinite;
-      letter-spacing: 3px;
+    h1 {
+      font-size: 42px;
+      animation: glow 2s ease-in-out infinite alternate;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     @keyframes glow {
-      0% { color: #ff00cc; text-shadow: 0 0 5px #ff00cc; }
-      25% { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
-      50% { color: #00ff99; text-shadow: 0 0 5px #00ff99; }
-      75% { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
-      100% { color: #ff00cc; text-shadow: 0 0 5px #ff00cc; }
+      from {
+        text-shadow: 0 0 10px #00ffff;
+      }
+      to {
+        text-shadow: 0 0 20px #ff00ff, 0 0 30px #00ff88;
+      }
     }
 
     .section {
-      margin: 30px auto;
-      max-width: 800px;
-      font-size: 18px;
-      line-height: 1.6;
-      background: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 12px;
+      margin: 10px auto;
+      max-width: 700px;
+      backdrop-filter: blur(6px);
     }
 
     .btns {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
     .btns a {
@@ -72,42 +73,53 @@
       color: black;
     }
 
+    small {
+      font-size: 12px;
+      color: #ccc;
+    }
+
     @media (max-width: 600px) {
-      .logo {
-        font-size: 32px;
+      h1 {
+        font-size: 28px;
       }
-      .section {
-        font-size: 16px;
+
+      .btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btns a {
+        width: 80%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <!-- الربع الأول: الشعار -->
-    <div class="logo">FusionVerse</div>
 
-    <!-- الربع الثاني: ما هو FusionVerse -->
-    <div class="section">
-      🚀 <strong>What is FusionVerse?</strong><br>
-      A rebellion against boring tokens.<br>
-      FusionVerse fuses the wildest memes into one unstoppable force.<br>
-      Not just a coin — it's a movement powered by chaos, culture, and community.
-    </div>
+  <!-- الربع الأول: الشعار -->
+  <h1>FusionVerse</h1>
 
-    <!-- الربع الثالث: المهمة -->
-    <div class="section">
-      🌍 <strong>Our Mission</strong><br>
-      We're forging partnerships with creators, influencers, and visionaries.<br>
-      Together, we're taking FusionVerse to the global stage — one meme at a time.
-    </div>
-
-    <!-- الربع الرابع: الأزرار -->
-    <div class="btns">
-      <a href="https://twitter.com/FusionVerse1" target="_blank">Twitter</a>
-      <a href="https://t.me/FusionVerse1" target="_blank">Telegram</a>
-      <a href="#" target="_blank">Contract Address<br><small>(Coming Soon)</small></a>
-    </div>
+  <!-- الربع الثاني: ما هو FusionVerse -->
+  <div class="section">
+    <p>🚀 <strong>What is FusionVerse?</strong></p>
+    <p>A rebellion against boring tokens.<br/>
+    FusionVerse fuses the wildest memes into one unstoppable force.<br/>
+    Not just a coin — it's a movement powered by chaos, culture, and community.</p>
   </div>
+
+  <!-- الربع الثالث: الرؤية -->
+  <div class="section">
+    <p>🌐 <strong>Our Vision</strong></p>
+    <p>We're teaming up with influencers, builders, and meme legends to launch globally.<br/>
+    FusionVerse isn't just here to play — it's here to dominate.</p>
+  </div>
+
+  <!-- الربع الرابع: روابط التواصل -->
+  <div class="btns">
+    <a href="https://twitter.com/FusionVerse1" target="_blank">Twitter</a>
+    <a href="https://t.me/FusionVerse1" target="_blank">Telegram</a>
+    <a href="#" target="_blank">CONTRACT ADDRESS<br><small>(Coming Soon)</small></a>
+  </div>
+
 </body>
 </html>
